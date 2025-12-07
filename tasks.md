@@ -11,7 +11,7 @@
 - [x] Task 6: Implement "Future of Work" Visuals & Animations
 
 ## 3. Frontend: Authentication (Better Auth Integration)
-- [ ] Task 7: Create Login Page `src/pages/login.tsx` (UI & Form Validation)
+- [x] Task 7: Create Login Page `src/pages/login.tsx` (UI & Form Validation)
 - [ ] Task 8: Create Signup Page `src/pages/signup.tsx` (UI & Form Validation)
 - [ ] Task 9: Create User Dashboard `src/pages/dashboard.tsx` (Protected Route UI)
 - [ ] Task 10: Implement Better Auth & Personalization Logic (Context/Hooks)
