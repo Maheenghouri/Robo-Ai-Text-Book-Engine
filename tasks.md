@@ -39,7 +39,7 @@
 - [x] Task 23: Create Query API Endpoints (`/query`, `/query-selected`)
 
 ## 7. Chatbot Integration
-- [ ] Task 24: Build Floating Chatbot Component (`src/components/Chatbot.tsx`)
+- [x] Task 24: Build Floating Chatbot Component (`src/components/Chatbot.tsx`)
 - [ ] Task 25: Implement Chat UI (Message List, Input, Loading States)
 - [ ] Task 26: Connect Chatbot to Backend API
 - [ ] Task 27: Implement "Ask AI on Selected Text" Feature
