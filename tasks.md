@@ -41,7 +41,7 @@
 ## 7. Chatbot Integration
 - [x] Task 24: Build Floating Chatbot Component (`src/components/Chatbot.tsx`)
 - [x] Task 25: Implement Chat UI (Message List, Input, Loading States)
-- [ ] Task 26: Connect Chatbot to Backend API
+- [x] Task 26: Connect Chatbot to Backend API
 - [ ] Task 27: Implement "Ask AI on Selected Text" Feature
 
 ## 8. Polish & Deployment

@@ -48,20 +48,58 @@ export default function Chatbot(): JSX.Element {
             content: input.trim()
         };
 
-        setMessages(prev => [...prev, userMsg]);
+        const currentInput = input.trim();
         setInput('');
+        setMessages(prev => [...prev, userMsg]);
         setIsTyping(true);
 
-        // Mock response for UI testing (will replace with Backend API in Task 26)
-        setTimeout(() => {
-            const aiMsg: Message = {
+        try {
+            const response = await fetch('http://localhost:8000/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: currentInput, stream: true }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const reader = response.body?.getReader();
+            if (!reader) throw new Error('No reader available');
+
+            // Create placeholder message for AI
+            const aiMsgId = (Date.now() + 1).toString();
+            setMessages(prev => [...prev, {
+                id: aiMsgId,
+                role: 'assistant',
+                content: ''
+            }]);
+            
+            setIsTyping(false); // We start streaming immediately
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const text = new TextDecoder().decode(value);
+                setMessages(prev => prev.map(msg => 
+                    msg.id === aiMsgId 
+                        ? { ...msg, content: msg.content + text }
+                        : msg
+                ));
+            }
+
+        } catch (error) {
+            console.error('Error querying backend:', error);
+            setIsTyping(false);
+            setMessages(prev => [...prev, {
                 id: (Date.now() + 1).toString(),
                 role: 'assistant',
-                content: "I'm processing your request... (Backend integration coming in Task 26!)"
-            };
-            setMessages(prev => [...prev, aiMsg]);
-            setIsTyping(false);
-        }, 1000);
+                content: "Sorry, I'm having trouble connecting to my brain server right now. Is the backend running?"
+            }]);
+        }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
