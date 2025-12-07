@@ -6,7 +6,7 @@
 - [x] Task 3: Configure `docusaurus.config.ts` (Metadata, Navbar, Footer, Color Mode)
 
 ## 2. Frontend: Landing Page & Design
-- [ ] Task 4: Design Global Layout & Theme (Infima Customization, Fonts)
+- [x] Task 4: Design Global Layout & Theme (Infima Customization, Fonts)
 - [ ] Task 5: Build Custom Homepage `src/pages/index.tsx` (Hero, Features, CTA)
 - [ ] Task 6: Implement "Future of Work" Visuals & Animations
 
