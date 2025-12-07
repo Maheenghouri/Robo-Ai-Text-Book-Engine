@@ -22,7 +22,7 @@
 ## 4. Content: Textbook & Documentation
 - [x] Task 11: Configure Sidebar Structure (`sidebars.ts`)
 - [x] Task 12: Create Module 1 Content: ROS 2 (Markdown Structure)
-- [ ] Task 13: Create Module 2 Content: Digital Twin (Gazebo/Unity)
+- [x] Task 13: Create Module 2 Content: Digital Twin (Gazebo/Unity)
 - [ ] Task 14: Create Module 3 Content: NVIDIA Isaac
 - [ ] Task 15: Create Module 4 Content: Vision-Language-Action
 
