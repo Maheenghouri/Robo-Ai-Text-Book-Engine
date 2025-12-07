@@ -29,7 +29,7 @@
 ## 5. Frontend: Advanced Features (Bonus)
 - [x] Task 16: Implement "Personalize Content" Button (Chapter Header)
 - [x] Task 17: Implement "Translate to Urdu" Button (Chapter Header)
-- [ ] Task 18: Implement Agent Skills & Subagents Logic
+- [x] Task 18: Implement Agent Skills & Subagents Logic
 
 ## 6. Backend: FastAPI & RAG Engine
 - [ ] Task 19: Initialize FastAPI Backend (Folder Structure, Venv, Dependencies)
