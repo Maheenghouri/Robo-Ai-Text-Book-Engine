@@ -8,7 +8,7 @@
 ## 2. Frontend: Landing Page & Design
 - [x] Task 4: Design Global Layout & Theme (Infima Customization, Fonts)
 - [x] Task 5: Build Custom Homepage `src/pages/index.tsx` (Hero, Features, CTA)
-- [ ] Task 6: Implement "Future of Work" Visuals & Animations
+- [x] Task 6: Implement "Future of Work" Visuals & Animations
 
 ## 3. Frontend: Authentication (Better Auth Integration)
 - [ ] Task 7: Create Login Page `src/pages/login.tsx` (UI & Form Validation)

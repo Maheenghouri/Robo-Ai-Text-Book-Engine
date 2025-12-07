@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import HeroVisual from '@site/src/components/HeroVisual';
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
@@ -17,6 +18,11 @@ export default function Home(): ReactNode {
 
           {/* Background Glow Effects */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/20 blur-[120px] rounded-full -z-10" />
+
+          {/* Visual Element */}
+          <div className="mb-8 animate-fade-in-up">
+            <HeroVisual />
+          </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary-foreground to-primary/80 animate-fade-in-up">
             Build the Future of <br className="hidden md:block" />
