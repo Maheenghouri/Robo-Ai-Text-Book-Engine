@@ -3,6 +3,7 @@ import Content from '@theme-original/DocItem/Content';
 import type { WrapperProps } from '@docusaurus/types';
 import type ContentType from '@theme/DocItem/Content';
 import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
 type Props = WrapperProps<typeof ContentType>;
 
