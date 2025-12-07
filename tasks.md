@@ -27,7 +27,7 @@
 - [x] Task 15: Create Module 4 Content: Vision-Language-Action
 
 ## 5. Frontend: Advanced Features (Bonus)
-- [ ] Task 16: Implement "Personalize Content" Button (Chapter Header)
+- [x] Task 16: Implement "Personalize Content" Button (Chapter Header)
 - [ ] Task 17: Implement "Translate to Urdu" Button (Chapter Header)
 - [ ] Task 18: Implement Agent Skills & Subagents Logic
 
