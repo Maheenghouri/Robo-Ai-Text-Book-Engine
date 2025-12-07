@@ -14,10 +14,10 @@
 - [x] Task 7: Create Login Page `src/pages/login.tsx` (UI & Form Validation)
 - [x] Task 8: Create Signup Page `src/pages/signup.tsx` (UI & Form Validation)
 - [x] Task 9: Create User Dashboard `src/pages/dashboard.tsx` (Protected Route UI)
-- [ ] Task 10: Implement Better Auth & Personalization Logic (Context/Hooks)
-    - [ ] Subtask: Integrate Better Auth (or simulate if library unavailable)
-    - [ ] Subtask: Add "Background" questions to Signup
-    - [ ] Subtask: Store user preferences for personalization
+- [x] Task 10: Implement Better Auth & Personalization Logic (Context/Hooks)
+    - [x] Subtask: Integrate Better Auth (or simulate if library unavailable)
+    - [x] Subtask: Add "Background" questions to Signup
+    - [x] Subtask: Store personalization data in User Profile
 
 ## 4. Content: Textbook & Documentation
 - [ ] Task 11: Configure Sidebar Structure (`sidebars.ts`)

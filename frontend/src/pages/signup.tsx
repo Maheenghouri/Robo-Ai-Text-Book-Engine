@@ -3,41 +3,41 @@ import { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useHistory } from '@docusaurus/router';
+import { useAuth, UserRate } from '../contexts/AuthContext';
 
 export default function Signup(): ReactNode {
-    const { siteConfig } = useDocusaurusContext();
+    const { signup, isLoading } = useAuth();
+    const history = useHistory();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
-        background: 'software', // Default choice
+        background: 'software' as UserRate,
     });
     const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
         setError('');
 
         // Validation
         if (!formData.name || !formData.email || !formData.password) {
             setError('Please fill in all fields');
-            setIsLoading(false);
             return;
         }
         if (formData.password.length < 8) {
             setError('Password must be at least 8 characters');
-            setIsLoading(false);
             return;
         }
 
-        // Simulate API Call
-        setTimeout(() => {
-            console.log('Signup attempt:', formData);
-            setIsLoading(false);
-        }, 1500);
+        try {
+            await signup(formData.name, formData.email, formData.background);
+            history.push('/dashboard');
+        } catch (err) {
+            setError('Failed to create account. Please try again.');
+        }
     };
 
     return (

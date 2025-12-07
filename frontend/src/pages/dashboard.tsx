@@ -1,8 +1,26 @@
 import type { ReactNode } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import { Redirect } from '@docusaurus/router';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Dashboard(): ReactNode {
+    const { user, isLoading, logout } = useAuth();
+
+    if (isLoading) {
+        return (
+            <Layout title="Loading..." description="Loading your dashboard">
+                <div className="min-h-screen bg-background flex items-center justify-center">
+                    <div className="animate-pulse text-blue-500 font-bold">Initializing Command Center...</div>
+                </div>
+            </Layout>
+        );
+    }
+
+    if (!user) {
+        return <Redirect to="/login" />;
+    }
+
     return (
         <Layout title="Command Center" description="Your Physical AI Learning Dashboard">
             <main className="min-h-screen bg-background text-foreground p-6 sm:p-12 relative overflow-hidden">
@@ -16,13 +34,19 @@ export default function Dashboard(): ReactNode {
                     <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 animate-fade-in-up">
                         <div>
                             <h1 className="text-4xl font-bold mb-2">Command Center</h1>
-                            <p className="text-gray-400">Welcome back, Pilot. Systems Online.</p>
+                            <p className="text-gray-400">Welcome back, {user.name}. Systems Online.</p>
                         </div>
                         <div className="flex gap-4">
                             <div className="p-4 rounded-2xl glass border border-white/5 flex items-center gap-3">
                                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                                 <span className="text-sm font-medium">ROS 2 Bridge: Connected</span>
                             </div>
+                            <button
+                                onClick={logout}
+                                className="px-6 py-2 rounded-2xl border border-red-500/20 text-red-400 hover:bg-red-500/10 transition-colors"
+                            >
+                                Logout
+                            </button>
                         </div>
                     </header>
 
@@ -83,7 +107,7 @@ export default function Dashboard(): ReactNode {
                                     AI Recommendation
                                 </h3>
                                 <p className="text-sm text-gray-300 mb-6 leading-relaxed">
-                                    Based on your interest in <strong>Hardware</strong>, we recommend starting the <em>"NVIDIA Isaac Sim"</em> module next to simulate your sensor arrays.
+                                    Based on your interest in <strong>{user.background === 'hardware' ? 'Hardware & Circuits' : 'Software & AI'}</strong>, we recommend starting the <em>"{user.background === 'hardware' ? 'NVIDIA Isaac Sim' : 'ROS 2 Python Client'}"</em> module next.
                                 </p>
                                 <button className="w-full py-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/50 text-blue-200 text-sm font-semibold transition-all">
                                     View Path
@@ -97,7 +121,7 @@ export default function Dashboard(): ReactNode {
                                     <div className="text-xs text-gray-500 uppercase tracking-wider">Hours Sim</div>
                                 </div>
                                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
-                                    <div className="text-3xl font-bold mb-1">850</div>
+                                    <div className="text-3xl font-bold mb-1">{user.xp}</div>
                                     <div className="text-xs text-gray-500 uppercase tracking-wider">XP Earned</div>
                                 </div>
                             </div>

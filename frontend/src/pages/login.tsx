@@ -3,38 +3,37 @@ import { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useHistory } from '@docusaurus/router';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Login(): ReactNode {
-    const { siteConfig } = useDocusaurusContext();
+    const { login, isLoading } = useAuth();
+    const history = useHistory();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
         setError('');
 
         // Basic Validation
         if (!email || !password) {
             setError('Please fill in all fields');
-            setIsLoading(false);
             return;
         }
-        if (!/\S+@\S+\.\S+/.test(email)) {
+        if (!/\S+@\S+\.\S/.test(email)) {
             setError('Please enter a valid email address');
-            setIsLoading(false);
             return;
         }
 
-        // Simulate API Call
-        setTimeout(() => {
-            // Placeholder for Better Auth logic
-            console.log('Login attempt:', { email, password });
-            setIsLoading(false);
-        }, 1000);
+        try {
+            await login(email);
+            history.push('/dashboard');
+        } catch (err) {
+            setError('Login failed. Please try again.');
+        }
     };
 
     return (
@@ -132,3 +131,4 @@ export default function Login(): ReactNode {
         </Layout>
     );
 }
+
