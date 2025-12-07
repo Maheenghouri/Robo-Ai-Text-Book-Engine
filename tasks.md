@@ -2,7 +2,7 @@
 
 ## 1. Setup & Installation
 - [x] Task 1: Initialize Docusaurus Project (TypeScript + Classic Preset)
-- [ ] Task 2: Clean Default Template & Install Dependencies (clsx, icons, etc.)
+- [x] Task 2: Clean Default Template & Install Dependencies (clsx, icons, etc.)
 - [ ] Task 3: Configure `docusaurus.config.ts` (Metadata, Navbar, Footer, Color Mode)
 
 ## 2. Frontend: Landing Page & Design
