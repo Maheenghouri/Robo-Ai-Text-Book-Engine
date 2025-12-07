@@ -20,7 +20,7 @@
     - [x] Subtask: Store personalization data in User Profile
 
 ## 4. Content: Textbook & Documentation
-- [ ] Task 11: Configure Sidebar Structure (`sidebars.ts`)
+- [x] Task 11: Configure Sidebar Structure (`sidebars.ts`)
 - [ ] Task 12: Create Module 1 Content: ROS 2 (Markdown Structure)
 - [ ] Task 13: Create Module 2 Content: Digital Twin (Gazebo/Unity)
 - [ ] Task 14: Create Module 3 Content: NVIDIA Isaac
