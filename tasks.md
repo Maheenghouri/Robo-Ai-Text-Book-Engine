@@ -32,7 +32,7 @@
 - [x] Task 18: Implement Agent Skills & Subagents Logic
 
 ## 6. Backend: FastAPI & RAG Engine
-- [ ] Task 19: Initialize FastAPI Backend (Folder Structure, Venv, Dependencies)
+- [x] Task 19: Initialize FastAPI Backend (Folder Structure, Venv, Dependencies)
 - [ ] Task 20: Setup Database Connections (Qdrant & Neon Postgres)
 - [ ] Task 21: Implement Document Ingestion API (`/ingest`)
 - [ ] Task 22: Implement Embedding & Vector Search Pipeline
