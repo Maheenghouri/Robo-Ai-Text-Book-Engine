@@ -1,14 +1,22 @@
 import os
-from openai import AsyncOpenAI
+from pathlib import Path
+import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
+# Ensure .env is loaded regardless of where the process starts
+BACKEND_DIR = Path(__file__).resolve().parent.parent
+ENV_PATH = BACKEND_DIR / ".env"
+load_dotenv(dotenv_path=ENV_PATH)
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
-aclient = AsyncOpenAI(api_key=OPENAI_API_KEY)
-
-async def get_embedding(text: str, model="text-embedding-3-small"):
-    text = text.replace("\n", " ")
-    response = await aclient.embeddings.create(input=[text], model=model)
-    return response.data[0].embedding
+async def get_embedding(text: str, model="models/text-embedding-004"):
+    # Gemini embedding model supports task_type, but default is usually fine for general retrieval
+    result = genai.embed_content(
+        model=model,
+        content=text,
+        task_type="retrieval_document",
+        title=None
+    )
+    return result['embedding']

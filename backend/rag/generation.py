@@ -1,14 +1,18 @@
 import os
-from openai import AsyncOpenAI
+from pathlib import Path
+import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
+# Ensure .env is loaded regardless of the working directory
+BACKEND_DIR = Path(__file__).resolve().parent.parent
+ENV_PATH = BACKEND_DIR / ".env"
+load_dotenv(dotenv_path=ENV_PATH)
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
-aclient = AsyncOpenAI(api_key=OPENAI_API_KEY)
-
-SYSTEM_PROMPT = """You are an expert AI Robotics Professor assisting a student with the "Robo Ai Text Book".
+# Gemini System Instructions are prepended to the prompt for broader SDK compatibility
+SYSTEM_INSTRUCTION = """You are an expert AI Robotics Professor assisting a student with the "Robo Ai Text Book".
 Your goal is to answer questions based STRICTLY on the provided context from the textbook modules.
 
 If the context does not contain the answer, acknowledge that it's not in the current textbook material but try to answer from general robotics knowledge, EXPLICITLY stating "This isn't in the provided text, but..."
@@ -26,17 +30,22 @@ async def generate_answer_stream(query: str, context: str):
     """
     Generates a streaming response to the user query using the provided context.
     """
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": f"Context found in textbook:\n---\n{context}\n---\n\nStudent Question: {query}"}
-    ]
-
-    stream = await aclient.chat.completions.create(
-        model="gpt-4o-mini", # Using cost-effective model for high speed
-        messages=messages,
-        stream=True
+    model = genai.GenerativeModel(
+        model_name="models/gemini-2.5-flash",
     )
+    
+    # Construct the prompt with context
+    prompt = f"""{SYSTEM_INSTRUCTION}
 
-    async for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            yield chunk.choices[0].delta.content
+Context found in textbook:
+---
+{context}
+---
+
+Student Question: {query}"""
+
+    response = await model.generate_content_async(prompt, stream=True)
+
+    async for chunk in response:
+        if chunk.text:
+            yield chunk.text

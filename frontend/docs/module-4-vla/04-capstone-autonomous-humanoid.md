@@ -1,5 +1,5 @@
 ---
-title: Capstone: Autonomous Humanoid
+title: "Capstone: Autonomous Humanoid"
 sidebar_position: 5
 ---
 

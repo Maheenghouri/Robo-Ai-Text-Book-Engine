@@ -2,7 +2,7 @@
 
 ## 1. Setup & Installation
 - [x] Task 1: Initialize Docusaurus Project (TypeScript + Classic Preset)
-- [x] Task 2: Clean Default Template & Install Dependencies (clsx, icons, etc.)
+- [x] Task 2: Clean Default Template & Install Dependencies (clsx, icons, etc.)ript
 - [x] Task 3: Configure `docusaurus.config.ts` (Metadata, Navbar, Footer, Color Mode)
 
 ## 2. Frontend: Landing Page & Design
@@ -15,7 +15,7 @@
 - [x] Task 8: Create Signup Page `src/pages/signup.tsx` (UI & Form Validation)
 - [x] Task 9: Create User Dashboard `src/pages/dashboard.tsx` (Protected Route UI)
 - [x] Task 10: Implement Better Auth & Personalization Logic (Context/Hooks)
-    - [x] Subtask: Integrate Better Auth (or simulate if library unavailable)
+    - [x] Subtask: Integrate Better Auth (or simulate if library unavailable)``
     - [x] Subtask: Add "Background" questions to Signup
     - [x] Subtask: Store personalization data in User Profile
 
@@ -45,6 +45,6 @@
 - [x] Task 27: Implement "Ask AI on Selected Text" Feature
 
 ## 8. Polish & Deployment
-- [ ] Task 28: Final UI Polish & Responsive Testing
-- [ ] Task 29: Deploy Backend (Render/Railway)
-- [ ] Task 30: Deploy Frontend (GitHub Pages/Vercel)
+- [x] Task 28: Final UI Polish & Responsive Testing
+- [x] Task 29: Deploy Backend (Render/Railway)
+- [x] Task 30: Deploy Frontend (GitHub Pages/Vercel)

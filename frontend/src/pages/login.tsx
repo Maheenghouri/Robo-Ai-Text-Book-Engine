@@ -46,25 +46,25 @@ export default function Login(): ReactNode {
                     <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px]" />
                 </div>
 
-                <div className="relative w-full max-w-md p-8 sm:p-10 rounded-3xl glass shadow-2xl border border-white/10 animate-fade-in-up mx-4">
+                <div className="relative w-full max-w-md p-8 sm:p-10 rounded-3xl glass shadow-2xl animate-fade-in-up mx-4">
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-2">
+                        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-2">
                             Welcome Back
                         </h1>
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
                             Continue your journey in Physical AI
                         </p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {error && (
-                            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center animate-pulse">
+                            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm text-center animate-pulse">
                                 {error}
                             </div>
                         )}
 
                         <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-medium text-gray-300">
+                            <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Email
                             </label>
                             <input
@@ -73,16 +73,16 @@ export default function Login(): ReactNode {
                                 placeholder="pilot@robotics.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white placeholder:text-gray-600"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                             />
                         </div>
 
                         <div className="space-y-2">
                             <div className="flex justify-between items-center">
-                                <label htmlFor="password" className="text-sm font-medium text-gray-300">
+                                <label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Password
                                 </label>
-                                <Link to="#" className="text-xs text-blue-400 hover:text-blue-300 transition-colors">
+                                <Link to="#" className="text-xs text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
                                     Forgot password?
                                 </Link>
                             </div>
@@ -92,7 +92,7 @@ export default function Login(): ReactNode {
                                 placeholder="••••••••"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white placeholder:text-gray-600"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                             />
                         </div>
 

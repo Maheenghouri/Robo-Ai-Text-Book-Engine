@@ -5,40 +5,61 @@ interface Skill {
     id: string;
     name: string;
     description: string;
-    icon: JSX.Element;
+    icon: React.ReactElement;
     active: boolean;
     color: string;
 }
 
-export default function SkillMatrix(): JSX.Element {
+export default function SkillMatrix(): React.ReactElement {
     const [skills, setSkills] = useState<Skill[]>([
         {
             id: 'vision',
             name: 'Visual Cortex',
             description: 'Object detection, Segmentation, and Depth perception.',
             active: true,
-            color: 'blue'
+            color: 'blue',
+            icon: (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+            )
         },
         {
             id: 'navigation',
             name: 'Navigation Subagent',
             description: 'VSLAM, Path Planning (Nav2), and Obstacle Avoidance.',
             active: false,
-            color: 'green'
+            color: 'green',
+            icon: (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+            )
         },
         {
             id: 'speech',
             name: 'Broca\'s Area',
             description: 'Speech recognition (Whisper) and Synthesis (TTS).',
             active: false,
-            color: 'purple'
+            color: 'purple',
+            icon: (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+            )
         },
         {
             id: 'manipulation',
             name: 'Motor Control',
             description: 'Fine motor skills for grasping and manipulation.',
             active: true,
-            color: 'orange'
+            color: 'orange',
+            icon: (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                </svg>
+            )
         }
     ]);
 
@@ -75,8 +96,7 @@ export default function SkillMatrix(): JSX.Element {
                                     "p-2 rounded-lg transition-colors",
                                     skill.active ? `bg-${skill.color}-500/20 text-${skill.color}-400` : "bg-gray-700/50 text-gray-500"
                                 )}>
-                                    {/* Icon placeholder using first letter */}
-                                    <span className="font-bold text-lg">{skill.name[0]}</span>
+                                    {skill.icon}
                                 </div>
                                 <div>
                                     <h3 className={clsx(

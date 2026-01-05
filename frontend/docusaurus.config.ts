@@ -16,7 +16,7 @@ const config: Config = {
   projectName: 'Robo-Ai-Text-Book-Engine',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+
 
   i18n: {
     defaultLocale: 'en',

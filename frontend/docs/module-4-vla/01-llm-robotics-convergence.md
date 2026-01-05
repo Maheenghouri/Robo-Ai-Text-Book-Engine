@@ -1,5 +1,5 @@
 ---
-title: The Convergence: VLA
+title: "The Convergence: VLA"
 sidebar_position: 2
 ---
 

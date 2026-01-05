@@ -1,5 +1,5 @@
 ---
-title: Gazebo: Physics & Collisions
+title: "Gazebo: Physics & Collisions"
 sidebar_position: 3
 ---
 

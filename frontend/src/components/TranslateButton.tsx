@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 
-export default function TranslateButton(): JSX.Element {
+export default function TranslateButton(): React.ReactElement {
     const [loading, setLoading] = useState(false);
     const [translated, setTranslated] = useState(false);
 

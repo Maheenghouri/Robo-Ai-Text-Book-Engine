@@ -50,59 +50,59 @@ export default function Signup(): ReactNode {
                     <div className="absolute bottom-[10%] left-[10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px]" />
                 </div>
 
-                <div className="relative w-full max-w-lg p-8 sm:p-10 rounded-3xl glass shadow-2xl border border-white/10 animate-fade-in-up mx-4">
+                <div className="relative w-full max-w-lg p-8 sm:p-10 rounded-3xl glass shadow-2xl animate-fade-in-up mx-4">
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200 mb-2">
+                        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-blue-800 to-blue-600 dark:from-white dark:via-blue-200 dark:to-blue-200 mb-2">
                             Create Account
                         </h1>
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
                             Start your journey into Physical AI
                         </p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         {error && (
-                            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center animate-pulse">
+                            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm text-center animate-pulse">
                                 {error}
                             </div>
                         )}
 
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-gray-300">Full Name</label>
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
                             <input
                                 type="text"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white placeholder:text-gray-600"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                 placeholder="Ada Lovelace"
                             />
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-gray-300">Email</label>
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                             <input
                                 type="email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white placeholder:text-gray-600"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                 placeholder="engineer@robotics.com"
                             />
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-gray-300">Password</label>
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                             <input
                                 type="password"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white placeholder:text-gray-600"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                 placeholder="••••••••"
                             />
                         </div>
 
                         {/* Personalization Section */}
                         <div className="pt-4 pb-2">
-                            <label className="text-sm font-medium text-blue-300 block mb-3">
+                            <label className="text-sm font-medium text-blue-600 dark:text-blue-300 block mb-3">
                                 Select Your Background
                             </label>
                             <div className="grid grid-cols-2 gap-4">
@@ -112,8 +112,8 @@ export default function Signup(): ReactNode {
                                     className={clsx(
                                         "p-4 rounded-xl border transition-all text-left group relative overflow-hidden",
                                         formData.background === 'software'
-                                            ? "bg-blue-600/20 border-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.2)]"
-                                            : "bg-white/5 border-white/10 text-gray-400 hover:bg-white/10"
+                                            ? "bg-blue-600/10 dark:bg-blue-600/20 border-blue-500 text-blue-900 dark:text-white shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+                                            : "bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10"
                                     )}
                                 >
                                     <div className="font-semibold mb-1">Software</div>
@@ -129,8 +129,8 @@ export default function Signup(): ReactNode {
                                     className={clsx(
                                         "p-4 rounded-xl border transition-all text-left group relative overflow-hidden",
                                         formData.background === 'hardware'
-                                            ? "bg-purple-600/20 border-purple-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.2)]"
-                                            : "bg-white/5 border-white/10 text-gray-400 hover:bg-white/10"
+                                            ? "bg-purple-600/10 dark:bg-purple-600/20 border-purple-500 text-purple-900 dark:text-white shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                                            : "bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10"
                                     )}
                                 >
                                     <div className="font-semibold mb-1">Hardware</div>

@@ -1,4 +1,3 @@
-```
 import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { useAuth } from '../contexts/AuthContext';
@@ -15,7 +14,7 @@ interface SelectionState {
     y: number;
 }
 
-export default function Chatbot(): JSX.Element {
+export default function Chatbot(): React.ReactElement {
     const { user } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -28,7 +27,7 @@ export default function Chatbot(): JSX.Element {
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [selection, setSelection] = useState<SelectionState | null>(null);
-    
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +38,7 @@ export default function Chatbot(): JSX.Element {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isOpen]);
-    
+
     useEffect(() => {
         if (isOpen) {
             setTimeout(() => inputRef.current?.focus(), 100);
@@ -75,14 +74,14 @@ export default function Chatbot(): JSX.Element {
         if (!reader) throw new Error('No reader available');
 
         setIsTyping(false); // Start streaming
-        
+
         while (true) {
             const { done, value } = await reader.read();
             if (done) break;
 
             const text = new TextDecoder().decode(value);
-            setMessages(prev => prev.map(msg => 
-                msg.id === aiMsgId 
+            setMessages(prev => prev.map(msg =>
+                msg.id === aiMsgId
                     ? { ...msg, content: msg.content + text }
                     : msg
             ));
@@ -109,7 +108,7 @@ export default function Chatbot(): JSX.Element {
             // Create placeholder
             const aiMsgId = (Date.now() + 1).toString();
             setMessages(prev => [...prev, { id: aiMsgId, role: 'assistant', content: '' }]);
-            
+
             await processStream(response, aiMsgId);
 
         } catch (error) {
@@ -121,10 +120,10 @@ export default function Chatbot(): JSX.Element {
 
     const handleExplainSelection = async () => {
         if (!selection) return;
-        
+
         const selectedText = selection.text;
         const query = "Explain this concept in the context of robotics";
-        
+
         setSelection(null); // Clear selection popup
         setIsOpen(true); // Open chat
 
@@ -141,10 +140,10 @@ export default function Chatbot(): JSX.Element {
             const response = await fetch('http://localhost:8000/query-selected', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     query: query,
-                    selected_text: selectedText, 
-                    stream: true 
+                    selected_text: selectedText,
+                    stream: true
                 }),
             });
 
@@ -173,9 +172,9 @@ export default function Chatbot(): JSX.Element {
             {selection && !isOpen && (
                 <button
                     onClick={handleExplainSelection}
-                    style={{ 
-                        position: 'absolute', 
-                        left: selection.x, 
+                    style={{
+                        position: 'absolute',
+                        left: selection.x,
                         top: selection.y,
                         transform: 'translate(-50%, -120%)'
                     }}
@@ -188,11 +187,11 @@ export default function Chatbot(): JSX.Element {
 
             <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
                 {/* Chat Window */}
-                <div 
+                <div
                     className={clsx(
                         "pointer-events-auto w-[380px] max-w-[90vw] bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-out origin-bottom-right mb-4 flex flex-col",
-                        isOpen 
-                            ? "opacity-100 scale-100 translate-y-0 h-[600px]" 
+                        isOpen
+                            ? "opacity-100 scale-100 translate-y-0 h-[600px]"
                             : "opacity-0 scale-90 translate-y-10 h-0 pointer-events-none"
                     )}
                 >
@@ -212,7 +211,7 @@ export default function Chatbot(): JSX.Element {
                                 </div>
                             </div>
                         </div>
-                        <button 
+                        <button
                             onClick={() => setIsOpen(false)}
                             className="text-gray-400 hover:text-white transition-colors"
                         >
@@ -225,12 +224,12 @@ export default function Chatbot(): JSX.Element {
                     {/* Messages Area */}
                     <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-transparent scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                         {messages.map((msg) => (
-                             <div key={msg.id} className={clsx("flex", msg.role === 'user' ? "justify-end" : "justify-start")}>
-                                <div 
+                            <div key={msg.id} className={clsx("flex", msg.role === 'user' ? "justify-end" : "justify-start")}>
+                                <div
                                     className={clsx(
                                         "max-w-[85%] text-sm px-4 py-3 rounded-2xl border",
-                                        msg.role === 'user' 
-                                            ? "bg-blue-600 text-white border-blue-500 rounded-tr-sm" 
+                                        msg.role === 'user'
+                                            ? "bg-blue-600 text-white border-blue-500 rounded-tr-sm"
                                             : "bg-white/10 text-gray-200 border-white/5 rounded-tl-sm"
                                     )}
                                 >
@@ -238,10 +237,10 @@ export default function Chatbot(): JSX.Element {
                                 </div>
                             </div>
                         ))}
-                        
+
                         {isTyping && (
                             <div className="flex justify-start">
-                                 <div className="bg-white/5 border border-white/5 text-gray-400 rounded-2xl rounded-tl-sm px-4 py-3">
+                                <div className="bg-white/5 border border-white/5 text-gray-400 rounded-2xl rounded-tl-sm px-4 py-3">
                                     <div className="flex space-x-1">
                                         <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
                                         <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
@@ -255,30 +254,30 @@ export default function Chatbot(): JSX.Element {
 
                     {/* Input Area */}
                     <div className="p-4 border-t border-white/10 bg-black/40">
-                       <div className="relative">
-                            <input 
+                        <div className="relative">
+                            <input
                                 ref={inputRef}
-                                type="text" 
+                                type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
-                                placeholder="Ask a question..." 
+                                placeholder="Ask a question..."
                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-10 text-sm text-white focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all placeholder-gray-500"
                                 disabled={isTyping}
                             />
-                             <button 
+                            <button
                                 onClick={handleSend}
                                 disabled={!input.trim() || isTyping}
                                 className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-blue-600 rounded-lg text-white hover:bg-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                             >
+                            >
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                 </svg>
                             </button>
-                       </div>
-                       <div className="text-center mt-2">
-                           <span className="text-[10px] text-gray-600">AI can make mistakes. Check important info.</span>
-                       </div>
+                        </div>
+                        <div className="text-center mt-2">
+                            <span className="text-[10px] text-gray-600">AI can make mistakes. Check important info.</span>
+                        </div>
                     </div>
                 </div>
 
@@ -287,19 +286,19 @@ export default function Chatbot(): JSX.Element {
                     onClick={() => setIsOpen(!isOpen)}
                     className={clsx(
                         "pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 group",
-                        isOpen 
-                            ? "bg-gray-800 text-gray-400 rotate-90" 
+                        isOpen
+                            ? "bg-gray-800 text-gray-400 rotate-90"
                             : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white animate-bounce-subtle"
                     )}
                 >
-                     <svg className={clsx("w-7 h-7 transition-all duration-300", isOpen ? "rotate-45" : "")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className={clsx("w-7 h-7 transition-all duration-300", isOpen ? "rotate-45" : "")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         {isOpen ? (
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         ) : (
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                         )}
                     </svg>
-                    
+
                     {/* Notification Badge */}
                     {!isOpen && messages.length === 1 && (
                         <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-black rounded-full"></span>
@@ -309,4 +308,4 @@ export default function Chatbot(): JSX.Element {
         </>
     );
 }
-```
+

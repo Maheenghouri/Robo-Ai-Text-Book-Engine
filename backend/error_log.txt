@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\PMLS\Desktop\robo-text-book-engine\backend\test_full_flow.py", line 11, in <module>
+    from backend.db.qdrant import get_qdrant_client, COLLECTION_NAME
+ImportError: cannot import name 'COLLECTION_NAME' from 'backend.db.qdrant' (C:\Users\PMLS\Desktop\robo-text-book-engine\backend\db\qdrant.py)
