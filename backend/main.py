@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from backend.models.chat import QueryRequest, QuerySelectedRequest
+from backend.models.chat import QueryRequest, QuerySelectedRequest, TranslateRequest
 
 app = FastAPI(
     title="Robo Ai Text Book Engine API",
@@ -67,5 +67,16 @@ async def query_selected_text(request: QuerySelectedRequest):
     # 1. Use selected text as context
     context_text = f"Selected Text:\n{request.selected_text}"
     
+    
     # 2. Generate
     return StreamingResponse(generate_answer_stream(request.query, context_text), media_type="text/event-stream")
+
+@app.post("/translate")
+async def translate_page_content(request: TranslateRequest):
+    from backend.rag.generation import translate_text
+    
+    try:
+        translated_text = await translate_text(request.text, request.target_lang)
+        return {"translated_text": translated_text}
+    except Exception as e:
+        return {"error": str(e)}

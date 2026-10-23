@@ -11,6 +11,7 @@ export default function ContentWrapper(props: Props): JSX.Element {
     return (
         <>
             <PersonalizeButton />
+            <TranslateButton />
             <Content {...props} />
         </>
     );

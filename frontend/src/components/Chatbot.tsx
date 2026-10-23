@@ -99,11 +99,17 @@ export default function Chatbot(): React.ReactElement {
         setIsTyping(true);
 
         try {
+            console.log("Sending query to backend:", currentInput);
             const response = await fetch('http://localhost:8000/query', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: currentInput, stream: true }),
             });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Backend Error (${response.status}): ${errorText}`);
+            }
 
             // Create placeholder
             const aiMsgId = (Date.now() + 1).toString();
@@ -112,9 +118,9 @@ export default function Chatbot(): React.ReactElement {
             await processStream(response, aiMsgId);
 
         } catch (error) {
-            console.error(error);
+            console.error("Chatbot Error:", error);
             setIsTyping(false);
-            setMessages(prev => [...prev, { id: Date.now().toString(), role: 'assistant', content: "Error connecting to AI." }]);
+            setMessages(prev => [...prev, { id: Date.now().toString(), role: 'assistant', content: `Error: ${error.message || "Could not connect to AI."}` }]);
         }
     };
 

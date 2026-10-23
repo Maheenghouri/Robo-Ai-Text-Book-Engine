@@ -49,3 +49,24 @@ Student Question: {query}"""
     async for chunk in response:
         if chunk.text:
             yield chunk.text
+            yield chunk.text
+
+async def translate_text(text: str, target_lang: str = "ur") -> str:
+    """
+    Translates text to target language using Gemini.
+    """
+    model = genai.GenerativeModel("models/gemini-2.5-flash")
+    
+    prompt = f"""You are a professional translator. Translate the following educational content to {target_lang}. 
+    CRITICAL INSTRUCTIONS:
+    1. Preserve ALL Markdown formatting (headers, bold, lists, links).
+    2. Do NOT translate code blocks or technical terms that usually stay in English (e.g., ROS 2, Python, C++).
+    3. Output ONLY the translated text.
+
+    Content to translate:
+    ---
+    {text}
+    """
+    
+    response = await model.generate_content_async(prompt)
+    return response.text
